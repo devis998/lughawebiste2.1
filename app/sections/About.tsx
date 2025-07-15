@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { UsersIcon, GlobeAltIcon, HeartIcon, StarIcon } from '@heroicons/react/24/outline';
 
 export default function About() {
@@ -12,25 +12,6 @@ export default function About() {
     { value: 0, target: 98, label: "Success Rate", suffix: "%" }
   ]);
 
-// eslint-disable-next-line react-hooks/exhaustive-deps
-useEffect(() => {
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        setIsVisible(true);
-        animateNumbers();
-      }
-    },
-    { threshold: 0.3 }
-  );
-
-  const section = document.getElementById('about');
-  if (section) observer.observe(section);
-
-  return () => observer.disconnect();
-}, [animateNumbers]);
-
-
   const animateNumbers = useCallback(() => {
     stats.forEach((stat, index) => {
       let current = 0;
@@ -41,12 +22,31 @@ useEffect(() => {
           current = stat.target;
           clearInterval(timer);
         }
-        setStats(prev => prev.map((s, i) =>
-          i === index ? { ...s, value: Math.floor(current) } : s
-        ));
+        setStats(prev =>
+          prev.map((s, i) =>
+            i === index ? { ...s, value: Math.floor(current) } : s
+          )
+        );
       }, 40);
     });
-  };
+  }, [stats]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          animateNumbers();
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    const section = document.getElementById('about');
+    if (section) observer.observe(section);
+
+    return () => observer.disconnect();
+  }, [animateNumbers]);
 
   const features = [
     {
@@ -70,21 +70,21 @@ useEffect(() => {
     <section id="about" className="py-16 bg-gradient-to-br from-lugha-mist to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          
+
           {/* Left Content */}
           <div className={`${isVisible ? 'animate-fade-in-left' : 'opacity-0'}`}>
             <div className="inline-flex items-center justify-center w-16 h-16 bg-lugha-teal/10 rounded-2xl mb-6">
               <UsersIcon className="h-8 w-8 text-lugha-teal" />
             </div>
-            
+
             <h2 className="text-4xl md:text-5xl font-bold text-lugha-primary mb-6">
               Who We Are
             </h2>
-            
+
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
               Lugha is a culturally intelligent language partner, made up of a global team of native speakers, translators, and cultural experts. We help brands communicate with clarity and empathy across borders.
             </p>
-            
+
             <p className="text-gray-600 mb-10 leading-relaxed">
               Our specialists bring human context to every translation — ensuring accurate, relevant, and respectful communication from East Africa to South Asia. We don&#39;t just translate words; we bridge cultures.
             </p>
@@ -92,7 +92,7 @@ useEffect(() => {
             {/* Features */}
             <div className="space-y-6">
               {features.map((feature, index) => (
-                <div 
+                <div
                   key={index}
                   className={`flex items-start space-x-4 ${isVisible ? `animate-fade-in-up delay-${(index + 1) * 100}` : 'opacity-0'}`}
                 >
@@ -116,7 +116,7 @@ useEffect(() => {
               <h3 className="text-2xl font-bold text-lugha-primary mb-8 text-center">
                 Our Impact in Numbers
               </h3>
-              
+
               <div className="grid grid-cols-2 gap-8">
                 {stats.map((stat, index) => (
                   <div key={index} className="text-center">
@@ -143,6 +143,7 @@ useEffect(() => {
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>
