@@ -20,7 +20,6 @@ export default function Contact() {
       },
       { threshold: 0.1 }
     )
-
     const section = document.getElementById('contact')
     if (section) observer.observe(section)
     return () => observer.disconnect()
@@ -86,6 +85,7 @@ export default function Contact() {
           </p>
         </div>
 
+        {/* Contact Info & Form */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Contact Info */}
           <div className="lg:col-span-1">
@@ -141,7 +141,7 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Contact Form */}
+          {/* Form */}
           <div className="lg:col-span-2">
             <div className={`bg-white rounded-2xl p-8 shadow-xl border border-gray-100 ${
               isVisible ? 'animate-fade-in-right delay-200' : 'opacity-0'

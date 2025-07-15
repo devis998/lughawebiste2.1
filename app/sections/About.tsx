@@ -39,7 +39,7 @@ export default function About() {
           current = stat.target;
           clearInterval(timer);
         }
-        setStats(prev => prev.map((s, i) => 
+        setStats(prev => prev.map((s, i) =>
           i === index ? { ...s, value: Math.floor(current) } : s
         ));
       }, 40);
@@ -84,7 +84,7 @@ export default function About() {
             </p>
             
             <p className="text-gray-600 mb-10 leading-relaxed">
-              Our specialists bring human context to every translation — ensuring accurate, relevant, and respectful communication from East Africa to South Asia. We don't just translate words; we bridge cultures.
+              Our specialists bring human context to every translation — ensuring accurate, relevant, and respectful communication from East Africa to South Asia. We don&#39;t just translate words; we bridge cultures.
             </p>
 
             {/* Features */}
@@ -132,7 +132,7 @@ export default function About() {
               <div className="mt-10 pt-8 border-t border-gray-100">
                 <blockquote className="text-center">
                   <p className="text-lg text-gray-700 italic mb-4">
-                    "Language is the bridge between cultures. We build those bridges with precision, care, and cultural intelligence."
+                    &quot;Language is the bridge between cultures. We build those bridges with precision, care, and cultural intelligence.&quot;
                   </p>
                   <footer className="text-lugha-primary font-semibold">
                     — Lugha Team

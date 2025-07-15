@@ -104,7 +104,7 @@ export default function Languages() {
           currentTranslators = lang.translators
           clearInterval(translatorsTimer)
         }
-        setAnimatedStats(prev => prev.map((item, index) => 
+        setAnimatedStats(prev => prev.map((item, index) =>
           index === langIndex ? { ...item, animatedTranslators: Math.floor(currentTranslators) } : item
         ))
       }, 50)
@@ -119,10 +119,10 @@ export default function Languages() {
           currentWords = wordsTarget
           clearInterval(wordsTimer)
         }
-        setAnimatedStats(prev => prev.map((item, index) => 
-          index === langIndex ? { 
-            ...item, 
-            animatedWords: Math.floor(currentWords).toLocaleString() 
+        setAnimatedStats(prev => prev.map((item, index) =>
+          index === langIndex ? {
+            ...item,
+            animatedWords: Math.floor(currentWords).toLocaleString()
           } : item
         ))
       }, 50)
@@ -131,7 +131,7 @@ export default function Languages() {
 
   return (
     <section className="py-24 bg-white" id="languages">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-20">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-lugha-teal/10 rounded-2xl mb-6">
@@ -199,10 +199,10 @@ export default function Languages() {
               {/* Progress Bar */}
               <div className="mt-6">
                 <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div 
+                  <div
                     className="bg-gradient-to-r from-lugha-teal to-lugha-primary h-2 rounded-full transition-all duration-1000 ease-out"
-                    style={{ 
-                      width: isVisible ? `${Math.min((lang.translators / 80) * 100, 100)}%` : '0%' 
+                    style={{
+                      width: isVisible ? `${Math.min((lang.translators / 80) * 100, 100)}%` : '0%'
                     }}
                   ></div>
                 </div>
@@ -234,7 +234,7 @@ export default function Languages() {
               <div className="text-lugha-mist">Countries Served</div>
             </div>
           </div>
-          
+
           <div className="text-center mt-8">
             <p className="text-lg text-lugha-mist mb-6">
               Don't see your language? We're constantly expanding our network.

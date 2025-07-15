@@ -95,7 +95,7 @@ export default function Careers() {
             Join Our Team
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            At Lugha, we're building a collective of passionate linguists, cultural connectors, and project leaders shaping global conversations. If you believe in the power of language, we want to hear from you.
+            At Lugha, we&#39;re building a collective of passionate linguists, cultural connectors, and project leaders shaping global conversations. If you believe in the power of language, we want to hear from you.
           </p>
         </div>
 
@@ -201,10 +201,10 @@ export default function Careers() {
         <div className="text-center">
           <div className="bg-gradient-to-r from-lugha-primary to-lugha-teal rounded-2xl p-8 md:p-12 text-white">
             <h3 className="text-2xl md:text-3xl font-bold mb-4">
-              Don't See Your Perfect Role?
+              Don&#39;t See Your Perfect Role?
             </h3>
             <p className="text-lugha-mist mb-8 text-lg max-w-2xl mx-auto">
-              We're always looking for talented linguists and cultural experts. Send us your CV and let's explore how you can contribute to our mission.
+              We&#39;re always looking for talented linguists and cultural experts. Send us your CV and let&#39;s explore how you can contribute to our mission.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-white text-lugha-primary px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-colors duration-300 shadow-lg">

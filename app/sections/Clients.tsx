@@ -71,7 +71,7 @@ export default function Clients() {
         </div>
 
         {/* Client Types Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
           {clientTypes.map((type, index) => (
             <div
               key={index}
@@ -98,7 +98,7 @@ export default function Clients() {
           
           <div className="flex animate-scroll-right mb-8">
             {[...clients, ...clients].map((client, index) => (
-              <div key={`row1-${index}`} className="flex-shrink-0 mx-8 flex items-center justify-center">
+              <div key={`row1-${index}`} className="flex-shrink-0 mx-12 flex items-center justify-center">
                 <img
                   src={client.logo}
                   alt={client.name}
@@ -110,7 +110,7 @@ export default function Clients() {
 
           <div className="flex animate-scroll-left">
             {[...clients.slice().reverse(), ...clients.slice().reverse()].map((client, index) => (
-              <div key={`row2-${index}`} className="flex-shrink-0 mx-8 flex items-center justify-center">
+              <div key={`row2-${index}`} className="flex-shrink-0 mx-12 flex items-center justify-center">
                 <img
                   src={client.logo}
                   alt={client.name}
