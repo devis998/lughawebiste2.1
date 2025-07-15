@@ -28,10 +28,10 @@ useEffect(() => {
   if (section) observer.observe(section);
 
   return () => observer.disconnect();
-}, []);
+}, [animateNumbers]);
 
 
-  const animateNumbers = () => {
+  const animateNumbers = useCallback(() => {
     stats.forEach((stat, index) => {
       let current = 0;
       const increment = stat.target / 50;

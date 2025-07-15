@@ -238,7 +238,7 @@ export default function Contact() {
         {/* WhatsApp CTA */}
         <div className="text-center mt-16">
           <p className="text-gray-600 mb-6">
-            Prefer to chat directly? We're available on WhatsApp for quick questions and consultations.
+            Prefer to chat directly? We&rsquo;re available on WhatsApp for quick questions and consultations.
           </p>
           <a
             href="https://wa.me/255744381263"
