@@ -12,22 +12,24 @@ export default function About() {
     { value: 0, target: 98, label: "Success Rate", suffix: "%" }
   ]);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          animateNumbers();
-        }
-      },
-      { threshold: 0.3 }
-    );
+// eslint-disable-next-line react-hooks/exhaustive-deps
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        setIsVisible(true);
+        animateNumbers();
+      }
+    },
+    { threshold: 0.3 }
+  );
 
-    const section = document.getElementById('about');
-    if (section) observer.observe(section);
+  const section = document.getElementById('about');
+  if (section) observer.observe(section);
 
-    return () => observer.disconnect();
-  }, []);
+  return () => observer.disconnect();
+}, []);
+
 
   const animateNumbers = () => {
     stats.forEach((stat, index) => {

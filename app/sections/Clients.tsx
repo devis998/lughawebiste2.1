@@ -128,7 +128,7 @@ export default function Clients() {
               Join Our Growing Network
             </h3>
             <p className="text-lugha-mist mb-8 text-lg max-w-2xl mx-auto">
-              Ready to expand your reach across cultures? Let's discuss how Lugha can support your organization's global communication needs.
+               Ready to expand your reach across cultures? Let&rsquo;s discuss how Lugha can support your organization&rsquo;s global communication needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-white text-lugha-primary px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-colors duration-300 shadow-lg">

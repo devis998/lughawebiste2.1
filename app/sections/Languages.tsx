@@ -237,7 +237,7 @@ export default function Languages() {
 
           <div className="text-center mt-8">
             <p className="text-lg text-lugha-mist mb-6">
-              Don't see your language? We're constantly expanding our network.
+              Don&rsquo;t see your language? We&rsquo;re constantly expanding our network.
             </p>
             <button className="bg-white text-lugha-primary px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-colors duration-300 shadow-lg">
               Request New Language

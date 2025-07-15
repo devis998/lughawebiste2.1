@@ -81,7 +81,7 @@ export default function Contact() {
             Get in Touch
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Ready to break language barriers? Let's discuss how Lugha can help your organization communicate effectively across cultures.
+            Ready to break language barriers? Let&rsquo;s discuss how Lugha can help your organization communicate effectively across cultures.
           </p>
         </div>
 
