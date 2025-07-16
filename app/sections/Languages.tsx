@@ -218,7 +218,7 @@ export default function Languages() {
         <div className="bg-gradient-to-r from-lugha-primary to-lugha-teal rounded-2xl p-8 md:p-12 text-white">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-4xl font-bold mb-2">15+</div>
+              <div className="text-4xl font-bold mb-2">20+</div>
               <div className="text-lugha-mist">Languages Covered</div>
             </div>
             <div>
