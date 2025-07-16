@@ -14,7 +14,7 @@ export default function Testimonials() {
       company: "Health for All Kenya",
       country: "Kenya",
       quote: "Lugha has been an incredible partner in our Swahili campaigns. Their cultural understanding goes beyond translation—they help us connect authentically with communities.",
-      img: "/images.jfif",
+      img: "/Sara.jpeg",
       rating: 5
     },
     {
@@ -23,7 +23,7 @@ export default function Testimonials() {
       company: "TechGlobal Solutions",
       country: "India",
       quote: "Professional and fast turnaround. Their Gujarati translations helped us expand into new markets with confidence. Highly recommended for any business going global.",
-      img: "/1827+Marketing+-+Business+Benefits+of+LinkedIn+Profiles+for+Your+Team.jfif",
+      img: "/Rajesh Patel.jpeg",
       rating: 5
     },
     {

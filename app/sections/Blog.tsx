@@ -53,7 +53,7 @@ export default function Blog() {
       category: "Technology",
       readTime: "7 min read",
       date: "Dec 28, 2024",
-      image: "/blog(1).jpeg",
+      image: "/blog (1).jpeg",
       featured: false
     }
   ]
