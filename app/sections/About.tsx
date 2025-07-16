@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { UsersIcon, GlobeAltIcon, HeartIcon, StarIcon } from '@heroicons/react/24/outline';
 
 export default function About() {
@@ -11,8 +11,15 @@ export default function About() {
     { value: 0, target: 500, label: "Happy Clients", suffix: "+" },
     { value: 0, target: 98, label: "Success Rate", suffix: "%" }
   ]);
+  const timersRef = useRef<NodeJS.Timeout[]>([]);
+  const hasAnimatedRef = useRef(false);
 
-  const animateNumbers = useCallback(() => {
+  const animateNumbers = () => {
+    timersRef.current.forEach(timer => clearInterval(timer));
+    timersRef.current = [];
+    setStats(prevStats =>
+      prevStats.map((stat) => ({ ...stat, value: 0 }))
+    );
     stats.forEach((stat, index) => {
       let current = 0;
       const increment = stat.target / 50;
@@ -28,15 +35,17 @@ export default function About() {
           )
         );
       }, 40);
+      timersRef.current.push(timer);
     });
-  }, [stats]);
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !hasAnimatedRef.current) {
           setIsVisible(true);
           animateNumbers();
+          hasAnimatedRef.current = true;
         }
       },
       { threshold: 0.3 }
@@ -45,8 +54,11 @@ export default function About() {
     const section = document.getElementById('about');
     if (section) observer.observe(section);
 
-    return () => observer.disconnect();
-  }, [animateNumbers]);
+    return () => {
+      observer.disconnect();
+      timersRef.current.forEach(timer => clearInterval(timer));
+    };
+  }, []);
 
   const features = [
     {
