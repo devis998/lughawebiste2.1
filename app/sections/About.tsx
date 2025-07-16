@@ -6,10 +6,10 @@ import { UsersIcon, GlobeAltIcon, HeartIcon, StarIcon } from '@heroicons/react/2
 export default function About() {
   const [isVisible, setIsVisible] = useState(false);
   const [stats, setStats] = useState([
-    { value: 0, target: 200, label: "Expert Linguists", suffix: "+" },
-    { value: 0, target: 15, label: "Languages Covered", suffix: "+" },
-    { value: 0, target: 500, label: "Happy Clients", suffix: "+" },
-    { value: 0, target: 98, label: "Success Rate", suffix: "%" }
+    { value: 0, target: 85, label: "Expert Linguists", suffix: "+" },
+    { value: 0, target: 20, label: "Languages Covered", suffix: "+" },
+    { value: 0, target: 100, label: "Happy Clients", suffix: "+" },
+    { value: 0, target: 98.7, label: "Success Rate", suffix: "%" }
   ]);
   const timersRef = useRef<NodeJS.Timeout[]>([]);
   const hasAnimatedRef = useRef(false);
