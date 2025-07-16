@@ -44,7 +44,7 @@ export default function Blog() {
       category: "Healthcare",
       readTime: "6 min read",
       date: "Jan 5, 2025",
-      image: "/Profile.jpg",
+      image: "/blog.jpeg",
       featured: false
     },
     {
@@ -53,7 +53,7 @@ export default function Blog() {
       category: "Technology",
       readTime: "7 min read",
       date: "Dec 28, 2024",
-      image: "/download.jfif",
+      image: "/blog(1).jpeg",
       featured: false
     }
   ]
