@@ -1,17 +1,14 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'POST') {
-    const { name, email, position, message, resume } = req.body;
+export async function POST(req: NextRequest) {
+  const body = await req.json();
+  const { name, email, position, message, resume } = body;
 
-    if (!name || !email || !position) {
-      return res.status(400).json({ error: 'Missing required fields' });
-    }
-
-    // TODO: Store applicant data or send email
-
-    return res.status(200).json({ success: true, message: 'Application received' });
+  if (!name || !email || !position) {
+    return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
   }
 
-  return res.status(405).json({ error: 'Method Not Allowed' });
+  // TODO: Store applicant data or send email
+
+  return NextResponse.json({ success: true, message: 'Application received' });
 }
