@@ -7,7 +7,7 @@ const languages = [
   {
     name: "Swahili",
     translators: 30,
-    words: "1M+",
+    words: "1,465,790",
     flag: "/flags/swahil.jpeg",
     region: "East Africa",
     speakers: "16M+"
@@ -15,7 +15,7 @@ const languages = [
   {
     name: "Gujarati",
     translators: 15,
-    words: "8k+",
+    words: "838,421",
     flag: "/flags/hindi.jpeg",
     region: "India",
     speakers: "57M+"
@@ -23,7 +23,7 @@ const languages = [
   {
     name: "Hindi",
     translators: 10,
-    words: "9k+",
+    words: "914,218",
     flag: "/flags/hindi.jpeg",
     region: "India",
     speakers: "600M+"
@@ -31,7 +31,7 @@ const languages = [
   {
     name: "Tamil",
     translators: 6,
-    words: "7k",
+    words: "734,314",
     flag: "/flags/tamil.png",
     region: "South Asia",
     speakers: "78M+"
@@ -39,7 +39,7 @@ const languages = [
   {
     name: "Luganda",
     translators: 10,
-    words: "8k",
+    words: "886,942",
     flag: "/flags/Flag-Uganda.webp",
     region: "East Africa",
     speakers: "6M+"
@@ -47,7 +47,7 @@ const languages = [
   {
     name: "Amharic",
     translators: 6,
-    words: "2k",
+    words: "218,587",
     flag: "/flags/amharic.png",
     region: "Ethiopia",
     speakers: "32M+"
@@ -55,7 +55,7 @@ const languages = [
   {
     name: "Arabic",
     translators: 2,
-    words: "5k",
+    words: "504,354",
     flag: "/flags/arabic.png",
     region: "MENA",
     speakers: "272M+"
@@ -63,7 +63,7 @@ const languages = [
   {
     name: "French",
     translators: 6,
-    words: "8k",
+    words: "843,978",
     flag: "/flags/french.png",
     region: "Global",
     speakers: "120M+"
