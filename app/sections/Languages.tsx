@@ -37,12 +37,12 @@ const languages = [
     speakers: "78M+"
   },
   {
-    name: "Kinyarwanda",
+    name: "Luganda",
     translators: 10,
     words: "886,942",
-    flag: "/flags/kinyarwanda.jpeg",
+    flag: "/flags/Flag-Uganda.webp",
     region: "East Africa",
-    speakers: "20M+"
+    speakers: "6M+"
   },
   {
     name: "Amharic",
