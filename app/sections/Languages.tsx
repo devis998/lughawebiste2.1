@@ -6,23 +6,23 @@ import { GlobeAltIcon } from '@heroicons/react/24/outline'
 const languages = [
   {
     name: "Swahili",
-    translators: 71,
-    words: "465,790",
+    translators: 30,
+    words: "1,465,790",
     flag: "/flags/swahil.jpeg",
     region: "East Africa",
-    speakers: "200M+"
+    speakers: "16M+"
   },
   {
     name: "Gujarati",
-    translators: 67,
+    translators: 15,
     words: "838,421",
     flag: "/flags/hindi.jpeg",
     region: "India",
-    speakers: "56M+"
+    speakers: "57M+"
   },
   {
     name: "Hindi",
-    translators: 52,
+    translators: 10,
     words: "914,218",
     flag: "/flags/hindi.jpeg",
     region: "India",
@@ -30,7 +30,7 @@ const languages = [
   },
   {
     name: "Tamil",
-    translators: 46,
+    translators: 6,
     words: "734,314",
     flag: "/flags/tamil.png",
     region: "South Asia",
@@ -38,35 +38,35 @@ const languages = [
   },
   {
     name: "Kinyarwanda",
-    translators: 54,
+    translators: 10,
     words: "886,942",
     flag: "/flags/kinyarwanda.jpeg",
     region: "East Africa",
-    speakers: "12M+"
+    speakers: "20M+"
   },
   {
     name: "Amharic",
-    translators: 16,
+    translators: 6,
     words: "218,587",
     flag: "/flags/amharic.png",
     region: "Ethiopia",
-    speakers: "57M+"
+    speakers: "32M+"
   },
   {
     name: "Arabic",
-    translators: 22,
+    translators: 2,
     words: "504,354",
     flag: "/flags/arabic.png",
     region: "MENA",
-    speakers: "422M+"
+    speakers: "272M+"
   },
   {
     name: "French",
-    translators: 46,
+    translators: 6,
     words: "843,978",
     flag: "/flags/french.png",
     region: "Global",
-    speakers: "280M+"
+    speakers: "120M+"
   }
 ]
 
@@ -141,7 +141,7 @@ export default function Languages() {
             Languages We Cover
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            From African heartlands to South Asian cities, Lugha bridges language gaps with culturally fluent experts — helping organizations connect, educate, and serve with clarity.
+            From African heartlands to South Asian cities, Lugha bridges language gaps with culturally fluent experts helping organizations connect, educate, and serve with clarity.
           </p>
         </div>
 
@@ -237,7 +237,7 @@ export default function Languages() {
 
           <div className="text-center mt-8">
             <p className="text-lg text-lugha-mist mb-6">
-              Don&rsquo;t see your language? We&rsquo;re constantly expanding our network.
+              Can not see your language? We are constantly expanding our network.
             </p>
             <button className="bg-white text-lugha-primary px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-colors duration-300 shadow-lg">
               Request New Language

@@ -81,7 +81,7 @@ export default function Contact() {
             Get in Touch
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Ready to break language barriers? Let&rsquo;s discuss how Lugha can help your organization communicate effectively across cultures.
+            Ready to break language barriers? Let us discuss how Lugha can help your organization communicate effectively across cultures.
           </p>
         </div>
 
@@ -238,7 +238,7 @@ export default function Contact() {
         {/* WhatsApp CTA */}
         <div className="text-center mt-16">
           <p className="text-gray-600 mb-6">
-            Prefer to chat directly? We&rsquo;re available on WhatsApp for quick questions and consultations.
+            Prefer to chat directly? We are available on WhatsApp for quick questions and consultations.
           </p>
           <a
             href="https://wa.me/255744381263"
