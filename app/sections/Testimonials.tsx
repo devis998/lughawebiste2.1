@@ -32,7 +32,7 @@ export default function Testimonials() {
       company: "Education First Tanzania",
       country: "Tanzania",
       quote: "Timely and culturally accurate translations that helped our educational mission succeed. The team understands the nuances that make communication effective.",
-      img: "/images.jfif",
+      img: "/Amina Hassan.jpeg",
       rating: 5
     },
     {
@@ -41,7 +41,7 @@ export default function Testimonials() {
       company: "Global Health Initiative",
       country: "Bangladesh",
       quote: "Lugha's interpreters made our multilingual health conferences smooth and inclusive. Their expertise in medical terminology is exceptional.",
-      img: "/1827+Marketing+-+Business+Benefits+of+LinkedIn+Profiles+for+Your+Team.jfif",
+      img: "/DrRahman Ahmed.jpeg",
       rating: 5
     }
   ]
