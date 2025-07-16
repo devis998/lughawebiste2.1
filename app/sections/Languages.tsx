@@ -222,7 +222,7 @@ export default function Languages() {
               <div className="text-lugha-mist">Languages Covered</div>
             </div>
             <div>
-              <div className="text-4xl font-bold mb-2">400+</div>
+              <div className="text-4xl font-bold mb-2">85+</div>
               <div className="text-lugha-mist">Expert Linguists</div>
             </div>
             <div>
@@ -230,7 +230,7 @@ export default function Languages() {
               <div className="text-lugha-mist">Words Translated</div>
             </div>
             <div>
-              <div className="text-4xl font-bold mb-2">50+</div>
+              <div className="text-4xl font-bold mb-2">10+</div>
               <div className="text-lugha-mist">Countries Served</div>
             </div>
           </div>

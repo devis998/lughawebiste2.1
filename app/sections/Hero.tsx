@@ -99,15 +99,15 @@ export default function Hero() {
           {/* Stats */}
           <div className="grid grid-cols-3 gap-4 sm:gap-8">
             <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-lugha-primary">200+</div>
+              <div className="text-2xl md:text-3xl font-bold text-lugha-primary">85+</div>
               <div className="text-sm text-gray-600">Expert Linguists</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-lugha-primary">500+</div>
+              <div className="text-2xl md:text-3xl font-bold text-lugha-primary">100+</div>
               <div className="text-sm text-gray-600">Happy Clients</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-lugha-primary">15+</div>
+              <div className="text-2xl md:text-3xl font-bold text-lugha-primary">20+</div>
               <div className="text-sm text-gray-600">Languages Covered</div>
             </div>
           </div>

@@ -38,22 +38,22 @@ export default function Clients() {
     {
       title: "NGOs & Non-Profits",
       desc: "Humanitarian organizations reaching communities across Africa and Asia",
-      count: "150+"
+      count: "10+"
     },
     {
       title: "Healthcare Institutions",
       desc: "Hospitals and health systems serving diverse populations",
-      count: "80+"
+      count: "10+"
     },
     {
       title: "Educational Organizations",
       desc: "Schools and universities expanding their global reach",
-      count: "120+"
+      count: "40+"
     },
     {
       title: "Tech Startups",
       desc: "Innovative companies localizing for emerging markets",
-      count: "200+"
+      count: "20+"
     }
   ]
 
