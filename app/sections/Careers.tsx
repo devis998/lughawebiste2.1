@@ -5,6 +5,13 @@ import { BriefcaseIcon, MapPinIcon, ClockIcon, CurrencyDollarIcon } from '@heroi
 
 export default function Careers() {
   const [isVisible, setIsVisible] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedRole, setSelectedRole] = useState<string>("")
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    coverLetter: ''
+  })
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -15,12 +22,39 @@ export default function Careers() {
       },
       { threshold: 0.1 }
     )
-
     const section = document.getElementById('careers')
     if (section) observer.observe(section)
-
     return () => observer.disconnect()
   }, [])
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handleJobApplication = async (e: React.FormEvent) => {
+    e.preventDefault()
+    try {
+      const response = await fetch('/api/apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          position: selectedRole
+        })
+      })
+      const result = await response.json()
+      if (response.ok && result.success) {
+        alert('Application submitted successfully!')
+        setFormData({ name: '', email: '', coverLetter: '' })
+        setIsModalOpen(false)
+      } else {
+        alert('Failed to apply: ' + (result.message || result.error || 'Unknown error'))
+      }
+    } catch (error) {
+      console.error('Error submitting application:', error)
+      alert('An error occurred. Please try again later.')
+    }
+  }
 
   const roles = [
     {
@@ -187,7 +221,13 @@ export default function Careers() {
                         {role.pay}
                       </span>
                     </div>
-                    <button className="bg-lugha-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-lugha-teal transition-colors duration-300 shadow-lg">
+                    <button
+                      onClick={() => {
+                        setSelectedRole(role.title)
+                        setIsModalOpen(true)
+                      }}
+                      className="bg-lugha-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-lugha-teal transition-colors duration-300 shadow-lg"
+                    >
                       Apply Now
                     </button>
                   </div>
@@ -197,25 +237,65 @@ export default function Careers() {
           </div>
         </div>
 
-        {/* CTA Section */}
-        <div className="text-center">
-          <div className="bg-gradient-to-r from-lugha-primary to-lugha-teal rounded-2xl p-8 md:p-12 text-white">
-            <h3 className="text-2xl md:text-3xl font-bold mb-4">
-              You do not See Your Perfect Role?
-            </h3>
-            <p className="text-lugha-mist mb-8 text-lg max-w-2xl mx-auto">
-              We are always looking for talented linguists and cultural experts. Send us your CV and see how you can contribute to our mission.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-white text-lugha-primary px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-colors duration-300 shadow-lg">
-                Send Your CV
-              </button>
-              <button className="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-lugha-primary transition-colors duration-300">
-                Join Our Talent Pool
-              </button>
+        {/* Application Modal */}
+        {isModalOpen && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <div className="bg-white rounded-2xl p-8 w-full max-w-lg shadow-xl">
+              <h3 className="text-2xl font-bold text-lugha-primary mb-6">
+                Apply for {selectedRole}
+              </h3>
+              <form onSubmit={handleJobApplication} className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-lugha-teal"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-lugha-teal"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Cover Letter</label>
+                  <textarea
+                    name="coverLetter"
+                    value={formData.coverLetter}
+                    onChange={handleInputChange}
+                    rows={4}
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-lugha-teal resize-none"
+                  />
+                </div>
+                <div className="flex gap-4">
+                  <button
+                    type="submit"
+                    className="flex-1 bg-lugha-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-lugha-teal shadow-lg"
+                  >
+                    Submit Application
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setIsModalOpen(false)}
+                    className="flex-1 border-2 border-lugha-primary text-lugha-primary px-6 py-3 rounded-xl font-semibold hover:bg-lugha-primary hover:text-white"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   )

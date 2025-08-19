@@ -33,34 +33,26 @@ export default function Contact() {
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
-      });
+      })
 
-      const result = await response.json();
+      const result = await response.json()
 
-      if (response.ok) {
-        alert('Message sent successfully!');
-        setFormData({
-          name: '',
-          email: '',
-          company: '',
-          service: '',
-          message: ''
-        });
+      if (response.ok && result.success) {
+        alert('Message sent successfully!')
+        setFormData({ name: '', email: '', company: '', service: '', message: '' })
       } else {
-        alert('Failed to send: ' + (result.error || 'Unknown error'));
+        alert('Failed to send: ' + (result.message || result.error || 'Unknown error'))
       }
     } catch (error) {
-      alert('An error occurred. Please try again later.');
-      console.error(error);
+      console.error('Error submitting form:', error)
+      alert('An error occurred. Please try again later.')
     }
   }
 
