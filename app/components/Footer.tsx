@@ -20,7 +20,7 @@ export default function Footer() {
 
           {/* Social Media Icons */}
           <div className="flex space-x-4 mt-4 text-gray-300">
-            <a href="https://linkedin.com/company/lugha" target="_blank" rel="noopener noreferrer">
+            <a href="https://linkedin.com/company/get-lugha" target="_blank" rel="noopener noreferrer">
               <Linkedin className="h-5 w-5 hover:text-[#A1B6DA] transition" />
             </a>
             <a href="https://twitter.com/lugha" target="_blank" rel="noopener noreferrer">
@@ -51,7 +51,7 @@ export default function Footer() {
             <a href="#careers" className="hover:text-lugha-accent block">Careers</a>
             <a href="#blog" className="hover:text-lugha-accent block">Blog</a>
             <a href="#contact" className="hover:text-lugha-accent block">Contact</a>
-            <a href="mailto:info@lugha.org" className="hover:text-lugha-accent block">Email Us</a>
+            <a href="mailto:getlugha@gmail.com" className="hover:text-lugha-accent block">Email Us</a>
           </div>
         </div>
 
@@ -60,8 +60,8 @@ export default function Footer() {
           <h4 className="font-semibold text-white">Head Office</h4>
           <p className="text-gray-300">Dar es Salaam, Tanzania</p>
           <p className="text-gray-300">Delhi, India</p>
-          <p className="text-gray-300">Email: info@lugha.org</p>
-          <p className="text-gray-300">Phone: +91 123 456 7890</p>
+          <p className="text-gray-300">Email: getlugha@gmail.com</p>
+          <p className="text-gray-300">Phone: +91 8469388794/+255 744381263</p>
         </div>
       </div>
 

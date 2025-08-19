@@ -60,8 +60,8 @@ export default function Contact() {
     {
       icon: <EnvelopeIcon className="h-6 w-6" />,
       title: "Email Us",
-      details: "info@lugha.org",
-      action: "mailto:info@lugha.org"
+      details: "getlugha@gmail.com",
+      action: "mailto:getlugha@gmail.com"
     },
     {
       icon: <PhoneIcon className="h-6 w-6" />,
