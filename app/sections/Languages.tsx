@@ -1,73 +1,21 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { GlobeAltIcon } from '@heroicons/react/24/outline'
+import { GlobeAltIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const languages = [
-  {
-    name: "Swahili",
-    translators: 30,
-    words: "1,465,790",
-    flag: "/flags/swahil.jpeg",
-    region: "East Africa",
-    speakers: "16M+"
-  },
-  {
-    name: "Gujarati",
-    translators: 15,
-    words: "838,421",
-    flag: "/flags/hindi.jpeg",
-    region: "India",
-    speakers: "57M+"
-  },
-  {
-    name: "Hindi",
-    translators: 10,
-    words: "914,218",
-    flag: "/flags/hindi.jpeg",
-    region: "India",
-    speakers: "600M+"
-  },
-  {
-    name: "Tamil",
-    translators: 6,
-    words: "734,314",
-    flag: "/flags/tamil.png",
-    region: "South Asia",
-    speakers: "78M+"
-  },
-  {
-    name: "Luganda",
-    translators: 10,
-    words: "886,942",
-    flag: "/flags/Flag-Uganda.webp",
-    region: "East Africa",
-    speakers: "6M+"
-  },
-  {
-    name: "Amharic",
-    translators: 6,
-    words: "218,587",
-    flag: "/flags/amharic.png",
-    region: "Ethiopia",
-    speakers: "32M+"
-  },
-  {
-    name: "Arabic",
-    translators: 2,
-    words: "504,354",
-    flag: "/flags/arabic.png",
-    region: "MENA",
-    speakers: "272M+"
-  },
-  {
-    name: "French",
-    translators: 6,
-    words: "843,978",
-    flag: "/flags/french.png",
-    region: "Global",
-    speakers: "120M+"
-  }
+  { name: "English", flag: "🇺🇸", translators: 2847, words: "2.3M" },
+  { name: "Spanish", flag: "🇪🇸", translators: 1923, words: "1.8M" },
+  { name: "French", flag: "🇫🇷", translators: 1456, words: "1.2M" },
+  { name: "German", flag: "🇩🇪", translators: 1234, words: "980K" },
+  { name: "Italian", flag: "🇮🇹", translators: 987, words: "750K" },
+  { name: "Portuguese", flag: "🇵🇹", translators: 876, words: "650K" },
+  { name: "Russian", flag: "🇷🇺", translators: 765, words: "580K" },
+  { name: "Chinese", flag: "🇨🇳", translators: 654, words: "520K" },
+  { name: "Japanese", flag: "🇯🇵", translators: 543, words: "420K" },
+  { name: "Korean", flag: "🇰🇷", translators: 432, words: "350K" },
+  { name: "Arabic", flag: "🇸🇦", translators: 398, words: "320K" },
+  { name: "Hindi", flag: "🇮🇳", translators: 287, words: "280K" }
 ]
 
 export default function Languages() {
@@ -75,6 +23,16 @@ export default function Languages() {
   const [animatedStats, setAnimatedStats] = useState(
     languages.map(lang => ({ ...lang, animatedTranslators: 0, animatedWords: "0" }))
   )
+  const [showLanguageModal, setShowLanguageModal] = useState(false)
+  const [formData, setFormData] = useState({
+    language: '',
+    region: '',
+    urgency: '',
+    contactName: '',
+    contactEmail: '',
+    useCase: ''
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -87,151 +45,152 @@ export default function Languages() {
       { threshold: 0.1 }
     )
 
-    const section = document.getElementById('languages')
-    if (section) observer.observe(section)
+    const section = document.getElementById('languages-section')
+    if (section) {
+      observer.observe(section)
+    }
 
     return () => observer.disconnect()
   }, [])
 
-  const animateStats = () => {
-    languages.forEach((lang, langIndex) => {
-      // Animate translators count
-      let currentTranslators = 0
-      const translatorsIncrement = lang.translators / 30
-      const translatorsTimer = setInterval(() => {
-        currentTranslators += translatorsIncrement
-        if (currentTranslators >= lang.translators) {
-          currentTranslators = lang.translators
-          clearInterval(translatorsTimer)
-        }
-        setAnimatedStats(prev => prev.map((item, index) =>
-          index === langIndex ? { ...item, animatedTranslators: Math.floor(currentTranslators) } : item
-        ))
-      }, 50)
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
 
-      // Animate words count
-      const wordsTarget = parseInt(lang.words.replace(/,/g, ''))
-      let currentWords = 0
-      const wordsIncrement = wordsTarget / 30
-      const wordsTimer = setInterval(() => {
-        currentWords += wordsIncrement
-        if (currentWords >= wordsTarget) {
-          currentWords = wordsTarget
-          clearInterval(wordsTimer)
-        }
-        setAnimatedStats(prev => prev.map((item, index) =>
-          index === langIndex ? {
-            ...item,
-            animatedWords: Math.floor(currentWords).toLocaleString()
-          } : item
-        ))
-      }, 50)
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    try {
+      const response = await fetch('/api/language', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        alert('Language request submitted successfully! We will contact you soon.')
+        setFormData({
+          language: '',
+          region: '',
+          urgency: '',
+          contactName: '',
+          contactEmail: '',
+          useCase: ''
+        })
+        setShowLanguageModal(false)
+      } else {
+        alert(data.message || 'Failed to submit language request. Please try again.')
+      }
+    } catch (error) {
+      alert('Failed to submit language request. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const animateStats = () => {
+    languages.forEach((lang, index) => {
+      setTimeout(() => {
+        let currentTranslators = 0
+        const targetTranslators = lang.translators
+        const increment = Math.ceil(targetTranslators / 50)
+        
+        const timer = setInterval(() => {
+          currentTranslators += increment
+          if (currentTranslators >= targetTranslators) {
+            currentTranslators = targetTranslators
+            clearInterval(timer)
+          }
+          
+          setAnimatedStats(prev => 
+            prev.map((item, i) => 
+              i === index 
+                ? { ...item, animatedTranslators: currentTranslators, animatedWords: lang.words }
+                : item
+            )
+          )
+        }, 30)
+      }, index * 100)
     })
   }
 
   return (
-    <section className="py-24 bg-white" id="languages">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-20">
-        {/* Header */}
+    <section id="languages-section" className="py-20 bg-gradient-to-br from-lugha-primary via-lugha-secondary to-lugha-teal">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-lugha-teal/10 rounded-2xl mb-6">
-            <GlobeAltIcon className="h-8 w-8 text-lugha-teal" />
+          <div className="flex justify-center mb-6">
+            <div className="bg-white/10 p-4 rounded-2xl">
+              <GlobeAltIcon className="h-12 w-12 text-white" />
+            </div>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-lugha-primary mb-6">
-            Languages We Cover
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Languages We Support
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            From African heartlands to South Asian cities, Lugha bridges language gaps with culturally fluent experts helping organizations connect, educate, and serve with clarity.
+          <p className="text-xl text-lugha-mist max-w-3xl mx-auto">
+            Connect with expert translators across dozens of languages. Our global network ensures 
+            accurate, culturally-aware translations for every project.
           </p>
         </div>
 
-        {/* Languages Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
           {animatedStats.map((lang, index) => (
             <div
-              key={index}
-              className={`group bg-gradient-to-br from-white to-lugha-mist/30 rounded-2xl p-6 border border-gray-100 hover:border-lugha-teal/30 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 ${
-                isVisible ? `animate-fade-in-up delay-${index * 100}` : 'opacity-0'
+              key={lang.name}
+              className={`bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-500 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
+              style={{ transitionDelay: `${index * 100}ms` }}
             >
-              {/* Flag and Language Name */}
-              <div className="flex items-center gap-4 mb-6">
-                <div className="relative">
-                  <img
-                    src={lang.flag}
-                    alt={`${lang.name} flag`}
-                    className="w-12 h-12 rounded-full object-cover border-2 border-lugha-teal/20 group-hover:border-lugha-teal/50 transition-colors duration-300"
-                  />
-                  <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-lugha-teal rounded-full flex items-center justify-center">
-                    <div className="w-2 h-2 bg-white rounded-full"></div>
-                  </div>
+              <div className="text-center">
+                <div className="text-4xl mb-3">{lang.flag}</div>
+                <h3 className="text-xl font-semibold text-white mb-2">{lang.name}</h3>
+                <div className="space-y-1">
+                  <p className="text-lugha-mist">
+                    <span className="font-bold text-white">{lang.animatedTranslators.toLocaleString()}</span> translators
+                  </p>
+                  <p className="text-lugha-mist">
+                    <span className="font-bold text-white">{lang.animatedWords}</span> words translated
+                  </p>
                 </div>
-                <div>
-                  <h3 className="text-lg font-bold text-lugha-primary group-hover:text-lugha-teal transition-colors duration-300">
-                    {lang.name}
-                  </h3>
-                  <p className="text-sm text-gray-500">{lang.region}</p>
-                </div>
-              </div>
-
-              {/* Stats */}
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Translators</span>
-                  <span className="font-bold text-lugha-teal text-lg">
-                    {lang.animatedTranslators}
-                  </span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Words Translated</span>
-                  <span className="font-bold text-lugha-primary text-lg">
-                    {lang.animatedWords}
-                  </span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Native Speakers</span>
-                  <span className="font-bold text-gray-700">
-                    {lang.speakers}
-                  </span>
-                </div>
-              </div>
-
-              {/* Progress Bar */}
-              <div className="mt-6">
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    className="bg-gradient-to-r from-lugha-teal to-lugha-primary h-2 rounded-full transition-all duration-1000 ease-out"
-                    style={{
-                      width: isVisible ? `${Math.min((lang.translators / 80) * 100, 100)}%` : '0%'
-                    }}
-                  ></div>
-                </div>
-                <p className="text-xs text-gray-500 mt-2 text-center">
-                  Translator Network Strength
-                </p>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Summary Stats */}
-        <div className="bg-gradient-to-r from-lugha-primary to-lugha-teal rounded-2xl p-8 md:p-12 text-white">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-4xl font-bold mb-2">20+</div>
-              <div className="text-lugha-mist">Languages Covered</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold mb-2">85+</div>
-              <div className="text-lugha-mist">Expert Linguists</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold mb-2">5M+</div>
-              <div className="text-lugha-mist">Words Translated</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold mb-2">10+</div>
-              <div className="text-lugha-mist">Countries Served</div>
+        <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20">
+          <div className="text-center">
+            <h3 className="text-2xl font-bold text-white mb-4">
+              Need a specific language pair?
+            </h3>
+            <p className="text-lugha-mist mb-6">
+              Our network includes specialists in rare languages, regional dialects, and technical terminology.
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+              <div>
+                <div className="text-2xl font-bold text-white">150+</div>
+                <div className="text-lugha-mist">Languages</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-white">500+</div>
+                <div className="text-lugha-mist">Language Pairs</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-white">24/7</div>
+                <div className="text-lugha-mist">Availability</div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-white">99.8%</div>
+                <div className="text-lugha-mist">Accuracy Rate</div>
+              </div>
             </div>
           </div>
 
@@ -239,11 +198,129 @@ export default function Languages() {
             <p className="text-lg text-lugha-mist mb-6">
               Can not see your language? We are constantly expanding our network.
             </p>
-            <button className="bg-white text-lugha-primary px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-colors duration-300 shadow-lg">
+            <button 
+              onClick={() => setShowLanguageModal(true)}
+              className="bg-white text-lugha-primary px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-colors duration-300 shadow-lg"
+            >
               Request New Language
             </button>
           </div>
         </div>
+
+        {/* Language Request Modal */}
+        {showLanguageModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+              <div className="p-6">
+                <div className="flex justify-between items-center mb-6">
+                  <h3 className="text-2xl font-bold text-lugha-primary">Request New Language</h3>
+                  <button 
+                    onClick={() => setShowLanguageModal(false)}
+                    className="text-gray-400 hover:text-gray-600"
+                  >
+                    <XMarkIcon className="h-6 w-6" />
+                  </button>
+                </div>
+
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Language *</label>
+                    <input
+                      type="text"
+                      name="language"
+                      value={formData.language}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="e.g., Yoruba, Hausa, Bengali"
+                      className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-lugha-teal"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Region/Country</label>
+                    <input
+                      type="text"
+                      name="region"
+                      value={formData.region}
+                      onChange={handleInputChange}
+                      placeholder="e.g., Nigeria, Bangladesh"
+                      className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-lugha-teal"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Urgency</label>
+                    <select
+                      name="urgency"
+                      value={formData.urgency}
+                      onChange={handleInputChange}
+                      className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-lugha-teal"
+                    >
+                      <option value="">Select urgency</option>
+                      <option value="Low - Planning ahead">Low - Planning ahead</option>
+                      <option value="Medium - Within 1 month">Medium - Within 1 month</option>
+                      <option value="High - Within 1 week">High - Within 1 week</option>
+                      <option value="Urgent - ASAP">Urgent - ASAP</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Your Name *</label>
+                    <input
+                      type="text"
+                      name="contactName"
+                      value={formData.contactName}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-lugha-teal"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                    <input
+                      type="email"
+                      name="contactEmail"
+                      value={formData.contactEmail}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-lugha-teal"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Use Case</label>
+                    <textarea
+                      name="useCase"
+                      value={formData.useCase}
+                      onChange={handleInputChange}
+                      rows={3}
+                      className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-lugha-teal"
+                      placeholder="What do you need this language for? (e.g., medical documents, educational content, business communication)"
+                    />
+                  </div>
+
+                  <div className="flex gap-4 pt-4">
+                    <button
+                      type="button"
+                      onClick={() => setShowLanguageModal(false)}
+                      className="flex-1 px-4 py-3 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="flex-1 px-4 py-3 bg-lugha-primary text-white rounded-lg font-medium hover:bg-lugha-primary/90 disabled:bg-gray-400 transition-colors"
+                    >
+                      {isSubmitting ? 'Submitting...' : 'Submit Request'}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   )
