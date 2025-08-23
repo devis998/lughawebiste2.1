@@ -36,15 +36,15 @@ export default function Services() {
       { threshold: 0.1 }
     )
 
-    const element = document.getElementById('services')
-    if (element) {
-      observer.observe(element)
-    }
+    const section = document.getElementById('services')
+    if (section) observer.observe(section)
 
     return () => observer.disconnect()
   }, [])
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target
     setFormData(prev => ({
       ...prev,
@@ -59,14 +59,11 @@ export default function Services() {
     try {
       const response = await fetch('/api/services', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       })
 
       const data = await response.json()
-
       if (data.success) {
         alert('Quote request submitted successfully! We will contact you soon.')
         setFormData({
@@ -88,89 +85,108 @@ export default function Services() {
     }
   }
 
+  // Services list with features (list style from second file)
   const services = [
     {
-      icon: DocumentTextIcon,
+      icon: <DocumentTextIcon className="h-7 w-7" />,
       title: "Document Translation",
-      description: "Professional translation of legal, medical, technical, and business documents with certified accuracy.",
-      features: ["Certified translations", "Technical documents", "Legal papers", "Medical records"]
+      desc: "Accurate translations for legal, medical, and business use.",
+      features: ["Certified translations", "Technical documents", "Legal papers", "Medical records"],
+      delay: "delay-100"
     },
     {
-      icon: ChatBubbleLeftRightIcon,
+      icon: <ChatBubbleLeftRightIcon className="h-7 w-7" />,
       title: "Interpretation",
-      description: "Real-time interpretation services for meetings, conferences, and events in multiple languages.",
-      features: ["Simultaneous interpretation", "Consecutive interpretation", "Remote interpretation", "Conference support"]
+      desc: "Real-time interpretation for conferences, interviews, and healthcare.",
+      features: ["Simultaneous", "Consecutive", "Remote interpretation", "Conference support"],
+      delay: "delay-200"
     },
     {
-      icon: SpeakerWaveIcon,
+      icon: <SpeakerWaveIcon className="h-7 w-7" />,
       title: "Voiceover",
-      description: "Native speaker voiceover services for commercials, documentaries, e-learning, and multimedia content.",
-      features: ["Native speakers", "Multiple accents", "Studio quality", "Fast turnaround"]
+      desc: "Native speaker voiceover for e-learning, media, and marketing.",
+      features: ["Native speakers", "Multiple accents", "Studio quality", "Fast turnaround"],
+      delay: "delay-300"
     },
     {
-      icon: LanguageIcon,
+      icon: <LanguageIcon className="h-7 w-7" />,
       title: "Subtitling",
-      description: "Accurate subtitling and closed captioning services for videos, films, and online content.",
-      features: ["Time-coded subtitles", "Multiple formats", "Quality assurance", "Cultural adaptation"]
+      desc: "Subtitles for training videos, campaigns, and films.",
+      features: ["Time-coded", "Multiple formats", "Cultural adaptation", "Quality assurance"],
+      delay: "delay-100"
     },
     {
-      icon: PencilIcon,
+      icon: <PencilIcon className="h-7 w-7" />,
       title: "Transcription",
-      description: "Precise transcription services for audio and video content in multiple languages and formats.",
-      features: ["Audio transcription", "Video transcription", "Time stamps", "Speaker identification"]
+      desc: "Clean and time-coded transcripts from interviews, calls, and audio.",
+      features: ["Audio transcription", "Video transcription", "Time stamps", "Speaker identification"],
+      delay: "delay-200"
     },
     {
-      icon: GlobeAsiaAustraliaIcon,
+      icon: <GlobeAsiaAustraliaIcon className="h-7 w-7" />,
       title: "Localization",
-      description: "Complete localization services for websites, software, and marketing materials for global markets.",
-      features: ["Website localization", "Software localization", "Cultural adaptation", "Market research"]
+      desc: "Tailoring apps, websites, and content to African and Asian markets.",
+      features: ["Website localization", "Software localization", "Cultural adaptation", "Market research"],
+      delay: "delay-300"
     },
     {
-      icon: AcademicCapIcon,
+      icon: <AcademicCapIcon className="h-7 w-7" />,
       title: "Language Training",
-      description: "Customized language training programs for individuals and corporate teams with native instructors.",
-      features: ["Corporate training", "Individual lessons", "Online classes", "Cultural training"]
+      desc: "Learn Swahili, Hindi, Bengali, Gujarati and more with live training.",
+      features: ["Corporate training", "Individual lessons", "Online classes", "Cultural training"],
+      delay: "delay-100"
     },
     {
-      icon: ClipboardDocumentListIcon,
+      icon: <ClipboardDocumentListIcon className="h-7 w-7" />,
       title: "Cultural Consulting",
-      description: "Expert guidance on cultural nuances, business etiquette, and market entry strategies.",
-      features: ["Cultural assessment", "Business etiquette", "Market analysis", "Communication strategies"]
+      desc: "Guiding brands on respectful and relevant cultural communication.",
+      features: ["Cultural assessment", "Business etiquette", "Market analysis", "Communication strategies"],
+      delay: "delay-200"
     }
   ]
 
   return (
-    <section id="services" className="py-20 bg-gradient-to-br from-lugha-mist to-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="services" className="py-16 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-20">
+        {/* Header */}
         <div className="text-center mb-16">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-lugha-teal/10 rounded-2xl mb-6">
+            <GlobeAsiaAustraliaIcon className="h-8 w-8 text-lugha-teal" />
+          </div>
           <h2 className="text-4xl md:text-5xl font-bold text-lugha-primary mb-6">
             Our Services
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Comprehensive language solutions tailored to your needs. From translation to cultural consulting, 
-            we bridge communication gaps with precision and cultural sensitivity.
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            We specialize in African and Asian languages, offering expert solutions across sectors with cultural intelligence and linguistic precision.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => (
             <div
               key={index}
-              className={`bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              className={`group bg-white rounded-2xl p-8 border border-gray-100 hover:border-lugha-teal/30 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 ${
+                isVisible ? `animate-fade-in-up ${service.delay}` : 'opacity-0'
               }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className="bg-gradient-to-br from-lugha-teal to-lugha-primary p-4 rounded-xl w-fit mb-6">
-                <service.icon className="h-8 w-8 text-white" />
+              {/* Icon */}
+              <div className="flex items-center justify-center w-14 h-14 bg-lugha-teal/10 rounded-xl mb-6 group-hover:bg-lugha-teal/20 transition-colors duration-300">
+                <div className="text-lugha-teal group-hover:scale-110 transition-transform duration-300">
+                  {service.icon}
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-lugha-primary mb-4">{service.title}</h3>
-              <p className="text-gray-600 mb-6">{service.description}</p>
-              <ul className="space-y-2">
-                {service.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-center text-sm text-gray-500">
-                    <div className="w-2 h-2 bg-lugha-teal rounded-full mr-3"></div>
-                    {feature}
+
+              {/* Content */}
+              <h3 className="text-xl font-semibold text-lugha-primary mb-4 group-hover:text-lugha-teal transition-colors duration-300">
+                {service.title}
+              </h3>
+              <p className="text-gray-600 leading-relaxed mb-4">{service.desc}</p>
+              <ul className="space-y-2 text-sm text-gray-500">
+                {service.features.map((f, i) => (
+                  <li key={i} className="flex items-center">
+                    <div className="w-2 h-2 bg-lugha-teal rounded-full mr-2"></div>
+                    {f}
                   </li>
                 ))}
               </ul>
@@ -179,15 +195,15 @@ export default function Services() {
         </div>
 
         {/* CTA Section */}
-        <div className="bg-gradient-to-r from-lugha-primary to-lugha-teal rounded-3xl p-12 text-center">
-          <div className="max-w-4xl mx-auto">
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Ready to Break Language Barriers?
+        <div className="text-center mt-16">
+          <div className="bg-gradient-to-r from-lugha-primary to-lugha-teal rounded-2xl p-8 md:p-12">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              Ready to break language barriers?
             </h3>
             <p className="text-lugha-mist mb-8 text-lg max-w-2xl mx-auto">
               Get a free quote for your project and discover how we can help you communicate effectively across cultures.
             </p>
-            <button 
+            <button
               onClick={() => setShowQuoteModal(true)}
               className="bg-white text-lugha-primary px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             >
@@ -203,7 +219,7 @@ export default function Services() {
               <div className="p-6">
                 <div className="flex justify-between items-center mb-6">
                   <h3 className="text-2xl font-bold text-lugha-primary">Get Free Quote</h3>
-                  <button 
+                  <button
                     onClick={() => setShowQuoteModal(false)}
                     className="text-gray-400 hover:text-gray-600"
                   >
@@ -257,14 +273,9 @@ export default function Services() {
                       className="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-lugha-teal"
                     >
                       <option value="">Select a service</option>
-                      <option value="Document Translation">Document Translation</option>
-                      <option value="Interpretation">Interpretation</option>
-                      <option value="Voiceover">Voiceover</option>
-                      <option value="Subtitling">Subtitling</option>
-                      <option value="Transcription">Transcription</option>
-                      <option value="Localization">Localization</option>
-                      <option value="Language Training">Language Training</option>
-                      <option value="Cultural Consulting">Cultural Consulting</option>
+                      {services.map((s, i) => (
+                        <option key={i} value={s.title}>{s.title}</option>
+                      ))}
                     </select>
                   </div>
 
