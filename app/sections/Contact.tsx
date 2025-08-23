@@ -242,12 +242,6 @@ export default function Contact() {
                   >
                     Send Message
                   </button>
-                  <button
-                    type="button"
-                    className="flex-1 border-2 border-lugha-primary text-lugha-primary px-8 py-4 rounded-xl font-semibold hover:bg-lugha-primary hover:text-white transition"
-                  >
-                    Request Quote
-                  </button>
                 </div>
               </form>
             </div>
