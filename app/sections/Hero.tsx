@@ -26,9 +26,9 @@ export default function Hero() {
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10 w-full">
         
-        {/* LEFT CONTENT */}
+        {/* LEFT: CONTENT (heading + stats on desktop) */}
         <div className="space-y-8 order-1">
-          {/* Main Heading */}
+          {/* Heading */}
           <div className="space-y-4">
             <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-lugha-primary leading-tight
               ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
@@ -43,8 +43,8 @@ export default function Hero() {
             </p>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-4 sm:gap-8">
+          {/* Stats (desktop only) */}
+          <div className="hidden lg:grid grid-cols-3 gap-4 sm:gap-8">
             {[
               { num: "85+", text: "Expert Linguists" },
               { num: "100+", text: "Happy Clients" },
@@ -63,7 +63,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* RIGHT IMAGE */}
+        {/* RIGHT: IMAGE */}
         <div className={`relative flex justify-center lg:justify-end order-2`}>
           <div className={`relative w-full max-w-sm sm:max-w-md md:max-w-lg 
             ${isVisible ? 'animate-scale-in' : 'opacity-0'}`}>
@@ -131,6 +131,25 @@ export default function Hero() {
               <span className="text-sm font-medium text-gray-700">25+ Languages</span>
             </div>
           </div>
+        </div>
+
+        {/* 📊 Stats (mobile only, shown after image) */}
+        <div className="grid grid-cols-3 gap-4 sm:gap-8 order-3 lg:hidden">
+          {[
+            { num: "85+", text: "Expert Linguists" },
+            { num: "100+", text: "Happy Clients" },
+            { num: "20+", text: "Languages Covered" }
+          ].map((stat, index) => (
+            <div 
+              key={index} 
+              className={`text-center transition-all duration-1000 
+                ${isVisible ? `animate-fade-in-up` : 'opacity-0'}`}
+              style={{ animationDelay: `${0.5 + index * 0.3}s` }}
+            >
+              <div className="text-2xl md:text-3xl font-bold text-lugha-primary">{stat.num}</div>
+              <div className="text-sm text-gray-600">{stat.text}</div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
