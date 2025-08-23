@@ -38,7 +38,7 @@ module.exports = {
           white: '#FFFFFF',     // Always include this for clarity
         },
       },
-     },
-   },
-  }
+    },
+  },
   plugins: [],
+}
