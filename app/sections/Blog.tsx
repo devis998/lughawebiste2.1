@@ -6,6 +6,38 @@ import { DocumentTextIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 export default function Blog() {
   const [isVisible, setIsVisible] = useState(false)
 
+  // For subscription backend
+  const [email, setEmail] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleSubscribe = async () => {
+    if (!email) {
+      alert("Please enter your email.")
+      return
+    }
+
+    setIsSubmitting(true)
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+
+      const data = await res.json()
+      if (data.success) {
+        alert('Subscription successful!')
+        setEmail('')
+      } else {
+        alert(data.message || 'Subscription failed.')
+      }
+    } catch (err) {
+      alert('Something went wrong, please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -194,10 +226,16 @@ export default function Blog() {
               <input
                 type="email"
                 placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="flex-1 px-4 py-3 rounded-xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-white"
               />
-              <button className="bg-white text-lugha-primary px-6 py-3 rounded-xl font-semibold hover:bg-gray-50 transition-colors duration-300 shadow-lg">
-                Subscribe
+              <button
+                onClick={handleSubscribe}
+                disabled={isSubmitting}
+                className="bg-white text-lugha-primary px-6 py-3 rounded-xl font-semibold hover:bg-gray-50 transition-colors duration-300 shadow-lg disabled:opacity-60"
+              >
+                {isSubmitting ? "Submitting..." : "Subscribe"}
               </button>
             </div>
           </div>
