@@ -222,19 +222,52 @@ export default function Clients() {
                 </button>
               </div>
 
-              {/* Case study examples from backend file */}
-              <div className="space-y-6">
-                <div className="border border-gray-200 rounded-lg p-6">
-                  <h4 className="text-xl font-semibold text-lugha-primary mb-3">UNICEF Tanzania Health Campaign</h4>
-                  <p className="text-gray-600 mb-4">Translated and provided voiceover for a major health awareness campaign reaching 2M+ people across rural Tanzania.</p>
+               <div className="space-y-6">
+                  {/* Case Study 1 */}
+                  <div className="border border-gray-200 rounded-lg p-6">
+                    <h4 className="text-xl font-semibold text-lugha-primary mb-3">UNICEF Tanzania Health Campaign</h4>
+                    <p className="text-gray-600 mb-4">
+                      Translated and provided voiceover for a major health awareness campaign reaching 2M+ people across rural Tanzania. 
+                      Services included Swahili translation, cultural adaptation, and professional voiceover recording.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="bg-lugha-teal/10 text-lugha-teal px-3 py-1 rounded-full text-sm">Swahili Translation</span>
+                      <span className="bg-lugha-teal/10 text-lugha-teal px-3 py-1 rounded-full text-sm">Voiceover</span>
+                      <span className="bg-lugha-teal/10 text-lugha-teal px-3 py-1 rounded-full text-sm">Cultural Adaptation</span>
+                    </div>
+                  </div>
+
+                  {/* Case Study 2 */}
+                  <div className="border border-gray-200 rounded-lg p-6">
+                    <h4 className="text-xl font-semibold text-lugha-primary mb-3">WHO COVID-19 Information Campaign</h4>
+                    <p className="text-gray-600 mb-4">
+                      Provided interpretation services for WHO's COVID-19 information sessions across 5 African countries. 
+                      Real-time interpretation in Swahili, Amharic, and French for healthcare workers and community leaders.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="bg-lugha-teal/10 text-lugha-teal px-3 py-1 rounded-full text-sm">Live Interpretation</span>
+                      <span className="bg-lugha-teal/10 text-lugha-teal px-3 py-1 rounded-full text-sm">Multiple Languages</span>
+                      <span className="bg-lugha-teal/10 text-lugha-teal px-3 py-1 rounded-full text-sm">Healthcare</span>
+                    </div>
+                  </div>
+
+                  {/* Case Study 3 */}
+                  <div className="border border-gray-200 rounded-lg p-6">
+                    <h4 className="text-xl font-semibold text-lugha-primary mb-3">EdTech Startup Localization</h4>
+                    <p className="text-gray-600 mb-4">
+                      Helped a Silicon Valley EdTech startup localize their learning platform for Indian markets. 
+                      Complete app translation in Hindi and Gujarati, including cultural adaptation of educational content.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="bg-lugha-teal/10 text-lugha-teal px-3 py-1 rounded-full text-sm">App Localization</span>
+                      <span className="bg-lugha-teal/10 text-lugha-teal px-3 py-1 rounded-full text-sm">Hindi & Gujarati</span>
+                      <span className="bg-lugha-teal/10 text-lugha-teal px-3 py-1 rounded-full text-sm">Education</span>
+                    </div>
+                  </div>
                 </div>
-                <div className="border border-gray-200 rounded-lg p-6">
-                  <h4 className="text-xl font-semibold text-lugha-primary mb-3">WHO COVID-19 Information Campaign</h4>
-                  <p className="text-gray-600 mb-4">Provided interpretation services for WHO’s COVID-19 sessions across 5 African countries.</p>
-                </div>
-              </div>
 
               <div className="mt-8 text-center">
+                <p className="text-gray-600 mb-4">Interested in working with us?</p>
                 <button onClick={() => { setShowCaseStudiesModal(false); setShowGetStartedModal(true) }} className="bg-lugha-primary text-white px-6 py-3 rounded-lg">
                   Get Started
                 </button>
