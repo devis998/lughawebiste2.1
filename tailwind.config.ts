@@ -17,14 +17,15 @@ module.exports = {
         fadeInUp: {
           '0%': { opacity: '0', transform: 'translateY(20px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
-       },
-       scaleIn: {
-         '0%': { opacity: '0', transform: 'scale(0.8)' },
-         '100%': { opacity: '1', transform: 'scale(1)' },
-       },
+        },
+        scaleIn: {
+          '0%': { opacity: '0', transform: 'scale(0.8)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+      },
       fontFamily: {
         sans: ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
-     },
+      },
       colors: {
         lugha: {
           primary: '#2C3E70',   // Core brand navy
@@ -40,4 +41,3 @@ module.exports = {
     },
   },
   plugins: [],
-}
