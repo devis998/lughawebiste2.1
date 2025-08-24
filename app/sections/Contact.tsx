@@ -238,7 +238,7 @@ export default function Contact() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <button
                     type="submit"
-                    className="flex-1 bg-lugha-primary text-white px-4 py-4 rounded-xl font-semibold hover:bg-lugha-teal shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition"
+                    className="bg-lugha-primary text-white px-8 py-4 rounded-xl font-semibold hover:bg-lugha-teal shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition"
                   >
                     Send Message
                   </button>
