@@ -23,16 +23,44 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Validate env config early
+    const emailHost = process.env.EMAIL_HOST;
+    const emailUser = process.env.EMAIL_USER;
+    const emailPass = process.env.EMAIL_PASS;
+
+    if (!emailHost || !emailUser || !emailPass) {
+      console.error('Missing email configuration: EMAIL_HOST/EMAIL_USER/EMAIL_PASS')
+      return NextResponse.json(
+        { success: false, message: 'Mail configuration is incomplete on the server' },
+        { status: 500 }
+      );
+    }
+
+    // Allow flexible port and secure flag. Default to 587 (STARTTLS) unless 465.
+    const port = parseInt(process.env.EMAIL_PORT || '587', 10);
+    const secure = (process.env.EMAIL_SECURE === 'true') || port === 465;
+
     // Create transporter
     const transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_HOST,
-      port: parseInt(process.env.EMAIL_PORT || '465'),
-      secure: true, // true for 465, false for other ports
+      host: emailHost,
+      port,
+      secure,
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        user: emailUser,
+        pass: emailPass,
       },
     });
+
+    // Verify connection configuration (useful for debugging connection/auth issues)
+    try {
+      await transporter.verify();
+    } catch (verifyError: any) {
+      console.error('Mail transporter verification failed:', verifyError);
+      return NextResponse.json(
+        { success: false, message: 'Unable to connect to mail server. Check credentials and host/port.' },
+        { status: 502 }
+      );
+    }
 
     // Email content
     const mailOptions = {
